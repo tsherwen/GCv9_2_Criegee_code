@@ -138,7 +138,16 @@
       USE TRACERID_MOD,       ONLY : IDEMONX, IDEC2H4
       USE TRACERID_MOD,       ONLY : IDTMONX, IDTC2H4
       USE TRACERID_MOD,       ONLY : IDECHBr3, IDECH2Br2
- 
+      
+      !mje Criegee 
+      USE TRACERID_MOD,       ONLY : IDEAPINE, IDEBPINE, IDELIMON
+      USE TRACERID_MOD,       ONLY : IDESABIN, IDEMYRCN, IDECAREN
+      USE TRACERID_MOD,       ONLY : IDEOCIMN
+      USE TRACERID_MOD,       ONLY : IDTAPINE, IDTBPINE, IDTLIMON
+      USE TRACERID_MOD,       ONLY : IDTSABIN, IDTMYRCN, IDTCAREN
+      USE TRACERID_MOD,       ONLY : IDTOCIMN
+
+      ! mje Criegee  
       USE CMN_SIZE_MOD             ! Size parameters
       USE COMODE_LOOP_MOD          ! IVERT?
       USE CMN_O3_MOD               ! Emissions arrays
@@ -505,7 +514,7 @@
  
                !FP_ISOP (6/2009)
                EMIS = ISOP_SCALING * EMIS
-
+               LMEGANMONO=.TRUE. 
                IF ( LMEGANMONO ) THEN
 
                   !------------------
@@ -646,6 +655,80 @@
      &                                     ( EMIS / DTSRCE )
                   ENDIF
                ENDIF
+       !mje Criegee  
+                
+                   
+               IF ( IDTAPINE /= 0 ) THEN
+
+                  ! NOTE: Don't save into EMISRR for the tagged CO 
+                  ! simulation (jaf, mak, bmy, 2/14/08)
+                  IF ( NO_TAGCO ) THEN
+                     EMISRR(I,J,IDEAPINE) = EMISRR(I,J,IDEAPINE) + 
+     &                               ( APINE  / DTSRCE )
+                  ENDIF
+               ENDIF
+               
+               IF ( IDTBPINE /= 0 ) THEN
+
+                  ! NOTE: Don't save into EMISRR for the tagged CO 
+                  ! simulation (jaf, mak, bmy, 2/14/08)
+                  IF ( NO_TAGCO ) THEN
+                     
+                     EMISRR(I,J,IDEBPINE) = EMISRR(I,J,IDEBPINE) + 
+     &                               ( BPINE   / DTSRCE )
+                  ENDIF
+               ENDIF
+               
+            IF ( IDTLIMON /= 0 ) THEN
+
+                  ! NOTE: Don't save into EMISRR for the tagged CO 
+                  ! simulation (jaf, mak, bmy, 2/14/08)
+                  IF ( NO_TAGCO ) THEN
+                     EMISRR(I,J,IDELIMON) = EMISRR(I,J,IDELIMON) + 
+     &                               ( LIMON   / DTSRCE )
+                  ENDIF
+               ENDIF
+               
+             IF ( IDTSABIN /= 0 ) THEN
+
+                  ! NOTE: Don't save into EMISRR for the tagged CO 
+                  ! simulation (jaf, mak, bmy, 2/14/08)
+                  IF ( NO_TAGCO ) THEN
+                     EMISRR(I,J,IDESABIN) = EMISRR(I,J,IDESABIN) + 
+     &                              ( SABIN  / DTSRCE )
+                  ENDIF
+               ENDIF
+               
+               IF ( IDTMYRCN /= 0 ) THEN
+
+                  ! NOTE: Don't save into EMISRR for the tagged CO 
+                  ! simulation (jaf, mak, bmy, 2/14/08)
+                  IF ( NO_TAGCO ) THEN
+                     EMISRR(I,J,IDEMYRCN) = EMISRR(I,J,IDEMYRCN) + 
+     &                               ( MYRCN  / DTSRCE )
+                  ENDIF
+               ENDIF
+               
+               IF ( IDTCAREN /= 0 ) THEN
+
+                  ! NOTE: Don't save into EMISRR for the tagged CO 
+                  ! simulation (jaf, mak, bmy, 2/14/08)
+                  IF ( NO_TAGCO ) THEN
+                     EMISRR(I,J,IDECAREN) = EMISRR(I,J,IDECAREN) + 
+     &                               ( CAREN / DTSRCE )
+                  ENDIF
+               ENDIF
+               
+                IF ( IDTOCIMN /= 0 ) THEN
+
+                  ! NOTE: Don't save into EMISRR for the tagged CO 
+                  ! simulation (jaf, mak, bmy, 2/14/08)
+                  IF ( NO_TAGCO ) THEN
+                     EMISRR(I,J,IDEOCIMN) = EMISRR(I,J,IDEOCIMN) + 
+     &                               ( OCIMN  / DTSRCE )
+                  ENDIF
+               ENDIF
+       !mje Criegee
 
             !=================================================================
             ! save biogenic monoterpene emission for later use

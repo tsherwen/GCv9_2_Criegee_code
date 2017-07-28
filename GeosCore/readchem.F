@@ -358,7 +358,7 @@
       ! Read 1st line of species list
  10   READ(KGLC,11) (XINP(I), I=1,3),C1,CSTRAT,CTROPL,CTROPS,CURBAN
  11   FORMAT(A1,1X,A14,A2,1X,0PF6.2,4(1PE10.3))
-
+ 	  write (6,*)  (XINP(I), I=1,3),C1,CSTRAT,CTROPL,CTROPS,CURBAN
       ! Test for "END" here (bmy, 4/7/03)
       IF (XINP(2).EQ.'END') GOTO 15
 
@@ -662,7 +662,8 @@
 !
  310  READ(KGLC,330) DINP,IORD,ARRT(1),BRRT(1),KCRRT(1),NCOF,SPECL(1),
      1               FCVT(1),FCT1T(1),FCT2T(1),COMMENT
-
+	  WRITE (6,*) DINP,IORD,ARRT(1),BRRT(1),KCRRT(1),NCOF,SPECL(1),
+     1               FCVT(1),FCT1T(1),FCT2T(1),COMMENT
 !FP_ISOP - for debug (6/2009)
 
 !#if !defined( ESMF_ )
@@ -680,6 +681,8 @@
       DO 350 I = 2, NCOF + 1
        READ(KGLC,330) JST,JORD,ARRT(I),BRRT(I),KCRRT(I),NDUM,SPECL(I),
      1                FCVT(I),FCT1T(I),FCT2T(I),COMMENT
+       WRITE (6,*) JST,JORD,ARRT(I),BRRT(I),KCRRT(I),NDUM,SPECL(I),
+     1                FCVT(I),FCT1T(I),FCT2T(I),COMMENT
  350  CONTINUE
 !
       ! Now read 20 entries instead of 16 (bdf, bmy, 4/1/03)
@@ -687,6 +690,7 @@
       ! NREAD is in comode.h (8/1/09)
       !READ(KGLC,332) (RINP(I),PINP(I),XINP(I),I=1,20)
       READ(KGLC,332) (RINP(I),PINP(I),XINP(I),I=1,NREAD)
+      write (6,*) (RINP(I),PINP(I),XINP(I),I=1,NREAD)
 !
  155  FORMAT('READCHEM: NCOF + 1 > MXCOF IN GLOBCHEM.DAT',3I4)
  330  FORMAT(A1,1X,I4,1X,ES8.2,1X,ES8.1,1X,I6,1X,I1,1X,A2,F6.2,1X,
@@ -1119,6 +1123,11 @@
                IF (SPECL(1).EQ.'Z') THEN
                   NKSPECZ(NCS) = NK
                ENDIF
+               IF (SPECL(1).EQ.'@') THEN 
+                  WRITE (6,*) '@@@@',NCS
+                  NNADDAT(NCS)=NNADDAT(NCS)+1
+                  NKSPECAT(NNADDAT(NCS),NCS) = NK
+               ENDIF
 !
 ! *********************************************************************
 ! *                       SURFACE REACTIONS                           * 
@@ -1191,6 +1200,7 @@
 !     ENDIF IDOPHOT.EQ.0
 !
       GOTO 310 
+       
 !
  400  FORMAT('INVALID REACT',I4,' W UNRECOGNIZABLE OR DEAD SPEC ',A14,
      1       'ALL REACTANTS MUST BE ACTIVE/INACTIVE. PRODS CAN BE DEAD') 

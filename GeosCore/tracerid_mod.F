@@ -260,7 +260,10 @@
       INTEGER            :: IDMEK,   IDALD2,   IDRCHO,  IDMVK,   IDMACR
       INTEGER            :: IDISN2,  IDR4N2,   IDCH2O,  IDC2H6,  IDMP
       INTEGER            :: IDDMS,   IDSO2,    IDSO4,   IDMSA
-      INTEGER            :: IDDRYO3, IDDRYPAN, IDDRYNO2, IDSO4s         
+      INTEGER            :: IDDRYO3, IDDRYPAN, IDDRYNO2, IDSO4s    
+      ! mje
+      INTEGER            :: IDAPINE, IDBPINE, IDLIMON
+      !mje     
       ! IDs of aromatics not use (hotp 8/1/09)
 !      INTEGER            :: IDGLYX,  IDMGLY
 !      INTEGER            :: IDBENZ,  IDTOLU,   IDXYLE,  IDMONX
@@ -322,6 +325,12 @@
       INTEGER            :: IDTPYPAN,IDTMAP
       INTEGER            :: IDTAP
       INTEGER            :: IDTMPN
+
+!mje Criegee
+      INTEGER 			 :: IDTAPINE, IDTBPINE, IDTLIMON
+      INTEGER            :: IDTSABIN, IDTMYRCN, IDTCAREN
+      INTEGER            :: IDTOCIMN
+!mje Criegee chemistry
 
       ! For tagged Ox simulation
       INTEGER            :: IDTO3Strt
@@ -495,7 +504,12 @@
       INTEGER            :: IDEGLYC
       INTEGER            :: IDEGLYX, IDEMGLY
       INTEGER            :: IDEHAC
-      !%%%%(bmy 4/13/11)
+      !mje Criegee chemistry
+      INTEGER 			 :: IDEAPINE, IDEBPINE, IDELIMON
+      INTEGER            :: IDESABIN, IDEMYRCN, IDECAREN
+      INTEGER            :: IDEOCIMN
+ 	  !mje Criegee chemistry
+ 	  
       INTEGER            :: IDERCHO, IDEHCOOH, IDEACTA       
       !jpp, 8/24/07: emission ID's for Br biogenic emissions in fullchem runs
       INTEGER            :: IDECHBr3, IDECH2Br2, IDEBr2      
@@ -755,6 +769,30 @@
 
             CASE ( 'ISOP' )
                IDTISOP  = N
+               
+!mje Criegee
+			CASE ( 'APINE' )
+               IDTAPINE  = N
+               
+            CASE ( 'BPINE' )
+               IDTBPINE  = N
+               
+            CASE ( 'LIMON' )
+               IDTLIMON  = N
+               
+            CASE ( 'SABIN' )
+               IDTSABIN  = N
+               
+            CASE ( 'MYRCN' )
+               IDTMYRCN  = N
+               
+            CASE ( 'CAREN' )
+               IDTCAREN = N
+               
+            CASE ( 'OCIMN' )
+               IDTOCIMN = N
+!mje Criegee
+               
                
             CASE ( 'HNO3' )
                IDTHNO3  = N
@@ -2738,6 +2776,47 @@
            NEMBIOG    = NEMBIOG   + 1
            IDEISOP    = NEMANTHRO + NEMBIOG
          ENDIF
+
+!mje Criegee         
+         IF ( IDTAPINE > 0 ) THEN
+           NEMBIOG    = NEMBIOG   + 1
+           IDEAPINE    = NEMANTHRO + NEMBIOG
+         ENDIF
+         
+        IF ( IDTBPINE > 0 ) THEN
+           NEMBIOG    = NEMBIOG   + 1
+           IDEBPINE    = NEMANTHRO + NEMBIOG
+         ENDIF
+         
+        IF ( IDTLIMON > 0 ) THEN
+           NEMBIOG    = NEMBIOG   + 1
+           IDELIMON    = NEMANTHRO + NEMBIOG
+         ENDIF
+         
+        IF ( IDTSABIN > 0 ) THEN
+           NEMBIOG    = NEMBIOG   + 1
+           IDESABIN    = NEMANTHRO + NEMBIOG
+         ENDIF
+         
+        IF ( IDTMYRCN > 0 ) THEN
+           NEMBIOG    = NEMBIOG   + 1
+           IDEMYRCN   = NEMANTHRO + NEMBIOG
+         ENDIF
+         
+        IF ( IDTCAREN > 0 ) THEN
+           NEMBIOG    = NEMBIOG   + 1
+           IDECAREN   = NEMANTHRO + NEMBIOG
+           WRITE (6,*) 'FOUND IDTCAREN', IDECAREN, IDTCAREN
+         ENDIF
+         
+         IF ( IDTOCIMN > 0 ) THEN 
+           NEMBIOG    = NEMBIOG   + 1
+           IDEOCIMN   = NEMANTHRO + NEMBIOG
+           WRITE (6,*) 'FOUND IDTOCIMN', IDEOCIMN, IDTOCIMN
+         ENDIF
+!mje Criegee
+         
+         
          IF ( IDTGLYX > 0 ) THEN
             NEMBIOG   = NEMBIOG + 1
             IDEGLYX   = NEMANTHRO + NEMBIOG
@@ -2790,6 +2869,17 @@
       IF ( IDEALK4 /= 0 ) IDEMS(IDEALK4) = IDTALK4
       IF ( IDEC2H6 /= 0 ) IDEMS(IDEC2H6) = IDTC2H6
       IF ( IDEISOP /= 0 ) IDEMS(IDEISOP) = IDTISOP
+!mje Criegee
+       IF ( IDEISOP /= 0 ) IDEMS(IDEISOP) = IDTISOP
+       IF ( IDEAPINE /= 0 ) IDEMS(IDEAPINE) = IDTAPINE
+       IF ( IDEBPINE /= 0 ) IDEMS(IDEBPINE) = IDTBPINE
+       IF ( IDELIMON /= 0 ) IDEMS(IDELIMON) = IDTLIMON
+       IF ( IDESABIN /= 0 ) IDEMS(IDESABIN) = IDTSABIN
+       IF ( IDEMYRCN /= 0 ) IDEMS(IDEMYRCN) = IDTMYRCN
+       IF ( IDECAREN /= 0 ) IDEMS(IDECAREN) = IDTCAREN
+       IF ( IDEOCIMN /= 0 ) IDEMS(IDEOCIMN) = IDTOCIMN
+!mje Criegee     
+      
       IF ( IDEACET /= 0 ) IDEMS(IDEACET) = IDTACET
       IF ( IDEMEK  /= 0 ) IDEMS(IDEMEK ) = IDTMEK
       IF ( IDEALD2 /= 0 ) IDEMS(IDEALD2) = IDTALD2
@@ -2871,9 +2961,13 @@
          WRITE( 6, 120 ) 'IDECHBr3 ', IDECHBr3 
          WRITE( 6, 120 ) 'IDECH2Br2', IDECH2Br2 
          WRITE( 6, 120 ) 'IDEBr2   ', IDEBr2 
+         WRITE( 6, 120 ) 'IDECAREN   ', IDECAREN
+         WRITE( 6, 120 ) 'IDEOCIMN   ', IDEOCIMN
          ! Add NAP info (hotp 8/24/09)
          WRITE( 6, 120 ) 'IDENAP   ', IDENAP
+         WRITE (6, 120 ) 'IDEAPINE ', IDEAPINE
          WRITE( 6, 115 ) '-----------------------------------------'
+         
       ENDIF
  115  FORMAT( a )
  120  FORMAT( a, i3 )
@@ -2990,6 +3084,10 @@
          IF ( NAMEGAS(I) == 'PRPE'   ) IDPRPE   = I
          IF ( NAMEGAS(I) == 'C3H8'   ) IDC3H8   = I
          IF ( NAMEGAS(I) == 'ISOP'   ) IDISOP   = I
+!mje
+         IF ( NAMEGAS(I) == 'APINE'  ) IDAPINE  = I
+         IF ( NAMEGAS(I) == 'BPINE'  ) IDBPINE  = I
+         IF ( NAMEGAS(I) == 'LIMON'  ) IDLIMON  = I
          IF ( NAMEGAS(I) == 'ALK4'   ) IDALK4   = I
          IF ( NAMEGAS(I) == 'PAN'    ) IDPAN    = I
          IF ( NAMEGAS(I) == 'GLPAN'  ) IDGLPAN  = I
@@ -4051,6 +4149,9 @@
       IDCO      = 0
       IDPRPE    = 0
       IDISOP    = 0
+      IDAPINE   = 0
+      IDBPINE   = 0
+      IDLIMON   = 0
       IDALK4    = 0
       IDC3H8    = 0
       IDPAN     = 0
@@ -4154,6 +4255,16 @@
       IDTHD     = 0 ! (jaegle, 11/07/2005)
       IDTALK4   = 0
       IDTISOP   = 0
+!mje Criegee
+      IDTAPINE  = 0
+      IDTBPINE  = 0
+      IDTLIMON  = 0
+      IDTSABIN  = 0
+      IDTMYRCN  = 0
+      IDTCAREN  = 0
+	  IDTOCIMN  = 0
+!mje Creigee
+
       IDTHNO3   = 0
       IDTH2O2   = 0
       IDTACET   = 0

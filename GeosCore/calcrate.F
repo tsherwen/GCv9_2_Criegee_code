@@ -660,7 +660,15 @@
            ENDDO
          ENDDO
 
+!mje criegee
 
+         DO I=1,NNADDAT(NCS)
+            NK=NKSPECAT(I,NCS)
+            DO KLOOP = 1, KTLOOP
+               RRATE(KLOOP,NK)=RRATE(KLOOP,NK)*CBLK(KLOOP,IH2O)
+            ENDDO
+         ENDDO
+         
 ! ---  K = K1 + K2  ---- 
          IF (NKSPECW(NCS).GT.0) THEN
             NK         = NKSPECW( I )

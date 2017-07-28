@@ -476,8 +476,12 @@
      &  NKSPECA(  MAXGL3,ICS), NKSPECB(  MAXGL3,ICS),
      &  NKSPECC(MAXGL3,ICS),NKSPECD(MAXGL3,ICS),NKSPECK(MAXGL3,ICS),
      &  NKSPECG(MAXGL2,ICS),NKSPECRO2HO2(MAXGL3,ICS),
-     &  NKSPECF(MAXGL3,ICS), NKSPECH(MAXGL3,ICS)
+     &  NKSPECF(MAXGL3,ICS), NKSPECH(MAXGL3,ICS),
+!mje add in the water term for the Criegees
+     &  NKSPECAT(MAXGL3,ICS)
 
+      INTEGER ::         NNADDAT(ICS)
+!end mje
       ! re-define some nkspec* arrays for harvard chem mechanism (bdf)
       INTEGER ::        NOLOSP(ICP),    NGNFRAC(ICP),    NOLOSRAT(ICP), 
      &                  IARRAY(ICP),    NALLRAT(ICP),    KZTLO(   ICP), 

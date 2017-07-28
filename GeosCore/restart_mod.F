@@ -819,7 +819,7 @@
             WRITE( 6, 110 ) N
             WRITE( 6, 120 ) 
             WRITE( 6, '(a)' ) REPEAT( '=', 79 )
-            CALL GEOS_CHEM_STOP
+!            CALL GEOS_CHEM_STOP
          ENDIF
       ENDDO
 
