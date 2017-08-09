@@ -264,6 +264,13 @@
       ! mje
       INTEGER            :: IDAPINE, IDBPINE, IDLIMON
       !mje     
+      ! tms SCI chem.  
+      INTEGER            :: IDOCSCIB, IDOCSCIA, IDBPSCIB
+      INTEGER            :: IDBPSCIA, IDSABSCIB, IDSABSCIA
+      INTEGER            :: IDLIMSCIB, IDLIMSCIA, IDCARSCIB
+      INTEGER            :: IDCARSCIA, IDMYRSCIB, IDMYRSCIA
+      INTEGER            :: IDAPSCIB, IDAPSCIA
+      ! tms SCI chem.  
       ! IDs of aromatics not use (hotp 8/1/09)
 !      INTEGER            :: IDGLYX,  IDMGLY
 !      INTEGER            :: IDBENZ,  IDTOLU,   IDXYLE,  IDMONX
@@ -327,10 +334,17 @@
       INTEGER            :: IDTMPN
 
 !mje Criegee
-      INTEGER 			 :: IDTAPINE, IDTBPINE, IDTLIMON
+      INTEGER            :: IDTAPINE, IDTBPINE, IDTLIMON
       INTEGER            :: IDTSABIN, IDTMYRCN, IDTCAREN
       INTEGER            :: IDTOCIMN
 !mje Criegee chemistry
+      ! tms SCI chem.
+      INTEGER            :: IDTOCSCIB, IDTOCSCIA, IDTBPSCIB
+      INTEGER            :: IDTBPSCIA, IDTSABSCIB, IDTSABSCIA
+      INTEGER            :: IDTLIMSCIB, IDTLIMSCIA, IDTCARSCIB
+      INTEGER            :: IDTCARSCIA, IDTMYRSCIB, IDTMYRSCIA
+      INTEGER            :: IDTAPSCIB, IDTAPSCIA
+      ! tms SCI chem/ 
 
       ! For tagged Ox simulation
       INTEGER            :: IDTO3Strt
@@ -505,10 +519,10 @@
       INTEGER            :: IDEGLYX, IDEMGLY
       INTEGER            :: IDEHAC
       !mje Criegee chemistry
-      INTEGER 			 :: IDEAPINE, IDEBPINE, IDELIMON
+      INTEGER            :: IDEAPINE, IDEBPINE, IDELIMON
       INTEGER            :: IDESABIN, IDEMYRCN, IDECAREN
       INTEGER            :: IDEOCIMN
- 	  !mje Criegee chemistry
+      !mje Criegee chemistry
  	  
       INTEGER            :: IDERCHO, IDEHCOOH, IDEACTA       
       !jpp, 8/24/07: emission ID's for Br biogenic emissions in fullchem runs
@@ -771,7 +785,7 @@
                IDTISOP  = N
                
 !mje Criegee
-			CASE ( 'APINE' )
+	    CASE ( 'APINE' )
                IDTAPINE  = N
                
             CASE ( 'BPINE' )
@@ -792,7 +806,36 @@
             CASE ( 'OCIMN' )
                IDTOCIMN = N
 !mje Criegee
-               
+      ! tms SCI chem.  
+            CASE ( 'OCSCIB' )
+               IDTOCSCIB  = N
+            CASE ( 'OCSCIA' )
+               IDTOCSCIA  = N
+            CASE ( 'BPSCIB' )
+               IDTBPSCIB  = N
+            CASE ( 'BPSCIA' )
+               IDTBPSCIA  = N
+            CASE ( 'SABSCIB' )
+               IDTSABSCIB  = N
+            CASE ( 'SABSCIA' )
+               IDTSABSCIA  = N
+            CASE ( 'LIMSCIB' )
+               IDTLIMSCIB  = N
+            CASE ( 'LIMSCIA' )
+               IDTLIMSCIA  = N
+            CASE ( 'CARSCIB' )
+               IDTCARSCIB  = N
+            CASE ( 'CARSCIA' )
+               IDTCARSCIA  = N
+            CASE ( 'MYRSCIB' )
+               IDTMYRSCIB  = N
+            CASE ( 'MYRSCIA' )
+               IDTMYRSCIA  = N
+            CASE ( 'APSCIB' )
+               IDTAPSCIB  = N
+            CASE ( 'APSCIA' )
+               IDTAPSCIA  = N
+      ! tms SCI chem.                
                
             CASE ( 'HNO3' )
                IDTHNO3  = N
@@ -3084,6 +3127,22 @@
          IF ( NAMEGAS(I) == 'PRPE'   ) IDPRPE   = I
          IF ( NAMEGAS(I) == 'C3H8'   ) IDC3H8   = I
          IF ( NAMEGAS(I) == 'ISOP'   ) IDISOP   = I
+      ! tms SCI chem.  
+         IF ( NAMEGAS(I) == 'OCSCIB'  ) IDOCSCIB  = I
+         IF ( NAMEGAS(I) == 'OCSCIA'  ) IDOCSCIA  = I
+         IF ( NAMEGAS(I) == 'BPSCIB'  ) IDBPSCIB  = I
+         IF ( NAMEGAS(I) == 'BPSCIA'  ) IDBPSCIA  = I
+         IF ( NAMEGAS(I) == 'SABSCIB'  ) IDSABSCIB  = I
+         IF ( NAMEGAS(I) == 'SABSCIA'  ) IDSABSCIA  = I
+         IF ( NAMEGAS(I) == 'LIMSCIB'  ) IDLIMSCIB  = I
+         IF ( NAMEGAS(I) == 'LIMSCIA'  ) IDLIMSCIA  = I
+         IF ( NAMEGAS(I) == 'CARSCIB'  ) IDCARSCIB  = I
+         IF ( NAMEGAS(I) == 'CARSCIA'  ) IDCARSCIA  = I
+         IF ( NAMEGAS(I) == 'MYRSCIB'  ) IDMYRSCIB  = I
+         IF ( NAMEGAS(I) == 'MYRSCIA'  ) IDMYRSCIA  = I
+         IF ( NAMEGAS(I) == 'APSCIB'  ) IDAPSCIB  = I
+         IF ( NAMEGAS(I) == 'APSCIA'  ) IDAPSCIA  = I
+      ! tms SCI chem.
 !mje
          IF ( NAMEGAS(I) == 'APINE'  ) IDAPINE  = I
          IF ( NAMEGAS(I) == 'BPINE'  ) IDBPINE  = I
@@ -4262,9 +4321,24 @@
       IDTSABIN  = 0
       IDTMYRCN  = 0
       IDTCAREN  = 0
-	  IDTOCIMN  = 0
+      IDTOCIMN  = 0
 !mje Creigee
-
+      ! tms SCI chem.  
+      IDTOCSCIB = 0
+      IDTOCSCIA = 0
+      IDTBPSCIB = 0
+      IDTBPSCIA = 0
+      IDTSABSCIB = 0
+      IDTSABSCIA = 0
+      IDTLIMSCIB = 0
+      IDTLIMSCIA = 0
+      IDTCARSCIB = 0
+      IDTCARSCIA = 0
+      IDTMYRSCIB = 0
+      IDTMYRSCIA = 0
+      IDTAPSCIB = 0
+      IDTAPSCIA = 0
+      ! tms SCI chem.
       IDTHNO3   = 0
       IDTH2O2   = 0
       IDTACET   = 0
