@@ -265,11 +265,10 @@
       INTEGER            :: IDAPINE, IDBPINE, IDLIMON
       !mje     
       ! tms SCI chem.  
-      INTEGER            :: IDOCSCIB, IDOCSCIA, IDBPSCIB
-      INTEGER            :: IDBPSCIA, IDSABSCIB, IDSABSCIA
-      INTEGER            :: IDLIMSCIB, IDLIMSCIA, IDCARSCIB
-      INTEGER            :: IDCARSCIA, IDMYRSCIB, IDMYRSCIA
-      INTEGER            :: IDAPSCIB, IDAPSCIA
+      INTEGER            :: IDOCSCIB, IDBPSCIB, IDBPSCIA
+      INTEGER            :: IDSABSCIB, IDSABSCIA, IDLIMSCIB
+      INTEGER            :: IDLIMSCIA, IDCARSCIB, IDCARSCIA
+      INTEGER            :: IDMYRSCIB, IDAPSCIB, IDAPSCIA
       ! tms SCI chem.  
       ! IDs of aromatics not use (hotp 8/1/09)
 !      INTEGER            :: IDGLYX,  IDMGLY
@@ -339,11 +338,10 @@
       INTEGER            :: IDTOCIMN
 !mje Criegee chemistry
       ! tms SCI chem.
-      INTEGER            :: IDTOCSCIB, IDTOCSCIA, IDTBPSCIB
-      INTEGER            :: IDTBPSCIA, IDTSABSCIB, IDTSABSCIA
-      INTEGER            :: IDTLIMSCIB, IDTLIMSCIA, IDTCARSCIB
-      INTEGER            :: IDTCARSCIA, IDTMYRSCIB, IDTMYRSCIA
-      INTEGER            :: IDTAPSCIB, IDTAPSCIA
+      INTEGER            :: IDTOCSCIB, IDTBPSCIB, IDTBPSCIA
+      INTEGER            :: IDTSABSCIB, IDTSABSCIA, IDTLIMSCIB
+      INTEGER            :: IDTLIMSCIA, IDTCARSCIB, IDTCARSCIA
+      INTEGER            :: IDTMYRSCIB, IDTAPSCIB, IDTAPSCIA
       ! tms SCI chem/ 
 
       ! For tagged Ox simulation
@@ -809,8 +807,6 @@
       ! tms SCI chem.  
             CASE ( 'OCSCIB' )
                IDTOCSCIB  = N
-            CASE ( 'OCSCIA' )
-               IDTOCSCIA  = N
             CASE ( 'BPSCIB' )
                IDTBPSCIB  = N
             CASE ( 'BPSCIA' )
@@ -829,8 +825,6 @@
                IDTCARSCIA  = N
             CASE ( 'MYRSCIB' )
                IDTMYRSCIB  = N
-            CASE ( 'MYRSCIA' )
-               IDTMYRSCIA  = N
             CASE ( 'APSCIB' )
                IDTAPSCIB  = N
             CASE ( 'APSCIA' )
@@ -3129,7 +3123,6 @@
          IF ( NAMEGAS(I) == 'ISOP'   ) IDISOP   = I
       ! tms SCI chem.  
          IF ( NAMEGAS(I) == 'OCSCIB'  ) IDOCSCIB  = I
-         IF ( NAMEGAS(I) == 'OCSCIA'  ) IDOCSCIA  = I
          IF ( NAMEGAS(I) == 'BPSCIB'  ) IDBPSCIB  = I
          IF ( NAMEGAS(I) == 'BPSCIA'  ) IDBPSCIA  = I
          IF ( NAMEGAS(I) == 'SABSCIB'  ) IDSABSCIB  = I
@@ -3139,7 +3132,6 @@
          IF ( NAMEGAS(I) == 'CARSCIB'  ) IDCARSCIB  = I
          IF ( NAMEGAS(I) == 'CARSCIA'  ) IDCARSCIA  = I
          IF ( NAMEGAS(I) == 'MYRSCIB'  ) IDMYRSCIB  = I
-         IF ( NAMEGAS(I) == 'MYRSCIA'  ) IDMYRSCIA  = I
          IF ( NAMEGAS(I) == 'APSCIB'  ) IDAPSCIB  = I
          IF ( NAMEGAS(I) == 'APSCIA'  ) IDAPSCIA  = I
       ! tms SCI chem.
@@ -4325,7 +4317,6 @@
 !mje Creigee
       ! tms SCI chem.  
       IDTOCSCIB = 0
-      IDTOCSCIA = 0
       IDTBPSCIB = 0
       IDTBPSCIA = 0
       IDTSABSCIB = 0
@@ -4335,7 +4326,6 @@
       IDTCARSCIB = 0
       IDTCARSCIA = 0
       IDTMYRSCIB = 0
-      IDTMYRSCIA = 0
       IDTAPSCIB = 0
       IDTAPSCIA = 0
       ! tms SCI chem.
