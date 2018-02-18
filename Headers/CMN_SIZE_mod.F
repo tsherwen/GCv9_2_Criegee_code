@@ -430,7 +430,10 @@
 #elif defined( APM )
       INTEGER, PARAMETER :: NNPAR   = 154   ! For APM (G. Luo, 3/8/11)
 #else
-      INTEGER, PARAMETER :: NNPAR   = 125   ! For non-TOMAS simulations
+
+!      INTEGER, PARAMETER :: NNPAR   = 125   ! For non-TOMAS simulations
+      ! TMS to be extra carefule, increase maz number of tracers for MT and SCI
+      INTEGER, PARAMETER :: NNPAR   = 145   ! For non-TOMAS simulations
 #endif
 
       ! Nempara increased to 26. (fp, 2/8/10)
